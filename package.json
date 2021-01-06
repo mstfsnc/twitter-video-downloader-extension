@@ -31,7 +31,7 @@
     "webpack-extension-reloader": "^1.1.4"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "mustache": "^4.0.1"
   }
 }
