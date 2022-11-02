@@ -29,6 +29,43 @@
         }
       }
 
+      &:hover .tooltip-text {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      .tooltip-text {
+        visibility: hidden;
+        width: max-content;
+        background-color: #555;
+        color: #fff;
+        text-align: center;
+        padding: 0.5rem;
+        border-radius: 6px;
+
+        /* Fade in tooltip */
+        opacity: 0;
+        transition: opacity 0.3s;
+
+        &.tooltip-left {
+          top: -5px;
+          bottom: auto;
+          right: 128%;
+          position: absolute;
+        }
+
+        &:after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 100%;
+          margin-top: -5px;
+          border-width: 5px;
+          border-style: solid;
+          border-color: transparent transparent transparent #555;
+        }
+      }
+
       svg {
         fill: currentcolor;
         color: #77ba99;
@@ -52,7 +89,8 @@
             }
           }
         }
-        &.success-icon {
+        &.success-icon,
+        &.error-icon {
           display: none;
         }
       }
@@ -63,17 +101,30 @@
         display: flex;
       }
       svg.download-icon,
-      svg.success-icon {
+      svg.success-icon,
+      svg.error-icon {
         display: none;
       }
     }
     &.success {
-      svg.loading-icon,
-      svg.download-icon {
-        display: none;
-      }
       svg.success-icon {
         display: flex;
+      }
+      svg.loading-icon,
+      svg.download-icon,
+      svg.error-icon {
+        display: none;
+      }
+    }
+    &.error {
+      svg.error-icon {
+        display: flex;
+        fill: red;
+      }
+      svg.loading-icon,
+      svg.download-icon,
+      svg.success-icon {
+        display: none;
       }
     }
   }

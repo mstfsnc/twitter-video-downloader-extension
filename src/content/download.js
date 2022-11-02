@@ -14,5 +14,9 @@ export default async function (url, name) {
 
       window.URL.revokeObjectURL(element.href);
       document.body.removeChild(element);
+      return true;
+    }).catch(err => {
+      console.error('Error while downloading video', err)
+      return false;
     });
 }

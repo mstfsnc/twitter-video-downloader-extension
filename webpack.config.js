@@ -13,6 +13,7 @@ const options = {
     ],
     inject: path.resolve(__dirname, "src/inject.js"),
     background: path.resolve(__dirname, "src/background/index.js"),
+    options: path.resolve(__dirname, "src/options/options.js"),
   },
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -74,6 +75,11 @@ const options = {
               })
             );
           },
+        },
+        {
+          from: path.resolve(__dirname, "src/options/options.html"),
+          to: "options.html",
+          force: true,
         },
         {
           from: path.resolve(__dirname, "public/icon-16.png"),

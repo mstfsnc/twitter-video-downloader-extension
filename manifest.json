@@ -19,6 +19,11 @@
       "css": ["content.css"]
     }
   ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "permissions": ["storage"],
   "web_accessible_resources": [
     {
       "resources": ["content.js"],
