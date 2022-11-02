@@ -1,9 +1,7 @@
 import onRequestDone from "./xhr";
 import parseRequest from "./parse";
-import downloadVideo from "./download";
 import observeDom from "./observe";
-import Button from "./button.html";
-import Mustache from "mustache";
+import { defaultWithFallback, link } from "./buttonType";
 
 const videos = [];
 onRequestDone(function (response) {
@@ -25,25 +23,20 @@ observeDom(function ({ $group, $image }) {
     const { width, height } = $group
       .querySelector("svg")
       .getBoundingClientRect();
+    
+    let buttonMode = localStorage.getItem('twitter-downloader-button-mode');
 
-    const $button = document.createElement("button");
-    $button.classList.add("extension-button");
-    $button.setAttribute("role", "button");
-    $button.insertAdjacentHTML(
-      "beforeend",
-      Mustache.render(Button, {
-        width,
-        height,
-      })
-    );
-    $group.appendChild($button);
-    $button.addEventListener("click", async function (event) {
-      event.preventDefault();
-      this.disabled = true;
-      this.classList.add("loading");
-      await downloadVideo(checkVideo.video, checkVideo.text);
-      this.classList.remove("loading");
-      this.classList.add("success");
-    });
+    switch (buttonMode) {
+      case 'default-with-fallback':
+        defaultWithFallback($group, checkVideo, width, height)
+        break;
+      case 'only-link':
+        link($group, checkVideo, width, height)
+        break;
+
+      default:
+        defaultWithFallback($group, checkVideo, width, height)
+        break;
+    }
   }
 });
