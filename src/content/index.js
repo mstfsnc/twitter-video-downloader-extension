@@ -1,9 +1,9 @@
-import onRequestDone from "./xhr";
-import parseRequest from "./parse";
+import Mustache from "mustache";
+import Button from "./button.html";
 import downloadVideo from "./download";
 import observeDom from "./observe";
-import Button from "./button.html";
-import Mustache from "mustache";
+import parseRequest from "./parse";
+import onRequestDone from "./xhr";
 
 const videoList = [];
 onRequestDone(function (response) {
@@ -59,6 +59,12 @@ observeDom(function ({ $group, $image }) {
       }
       this.classList.remove("loading");
       this.classList.add("success");
+
+      // Reset button and can download video again
+      setTimeout(() => {
+        this.classList.remove("success");
+        this.disabled = false;
+      }, 2000);
     });
   }
 });
